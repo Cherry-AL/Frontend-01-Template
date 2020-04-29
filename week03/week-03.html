@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+   <script>
+       window.onload = function () {
+
+           // JavaScript | 表达式，类型准换
+           // 根据这节课上讲师已写好的部分，补充写完函数 convertStringToNumber
+           function convertStringToNumber(string,x) {
+               if(arguments.length < 2)
+                   x = 10;
+                 var chars = string.split('');
+                 var number = 0;
+                 var i = 0;
+                 while(i < chars.length && chars[i] != '.'){
+                     number = number * x;
+                     number += chars[i].codePointAt(0) - '0'.codePointAt(0);
+                     i++;
+                 }
+                 if(chars[i] == '.'){
+                     i++;
+                 }
+                 var fraction = 1;
+                 while(i < chars.length){
+                     fraction = fraction / x;
+                   number += (chars[i].codePointAt(0) - '0'.codePointAt(0)) * fraction;
+
+                   i ++;
+               }
+                 return number;
+           }
+           // console.log(convertStringToNumber("155.13",10))
+
+
+           // 以及函数 convertNumberToString
+
+           function convertNumberToString(number,x) {
+               var rep = /[\.]/;
+               var string = '';
+               var i = 0;
+               if(!rep.test(number)){
+                   while (number > 0){
+                       string = String(number % 10) + string;
+                       number = Math.floor(number / 10)
+                   }
+               }else{
+                   var int =  Math.floor(number);
+                   var fraction = Number(number.toString().split('.')[1]);
+                   console.log('小数部分',fraction);
+                   while (int > 0){
+                       string = String(int % x) + string;
+                       int = Math.floor(int / x)
+                   }
+               }
+               return string + '.' + fraction
+           }
+          console.log(convertNumberToString(123.1,10))
+       }
+
+
+
+
+
+   </script>
+</body>
+</html>
